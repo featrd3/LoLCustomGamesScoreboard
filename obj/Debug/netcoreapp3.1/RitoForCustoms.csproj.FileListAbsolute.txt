@@ -1,0 +1,15 @@
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.csprojAssemblyReference.cache
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.AssemblyInfoInputs.cache
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.AssemblyInfo.cs
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.csproj.CoreCompileInputs.cache
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.exe
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.deps.json
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.runtimeconfig.json
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.runtimeconfig.dev.json
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.dll
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\RitoForCustoms.pdb
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.dll
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.pdb
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.genruntimeconfig.cache
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\KrzysiekNieAdmin\source\repos\RitoForCustoms\obj\Debug\netcoreapp3.1\RitoForCustoms.csproj.CopyComplete
