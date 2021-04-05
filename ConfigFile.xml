@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <appSettings>
-    <add key="token" value="0" />
-    <add key="prefix" value="1" />
+    <add key="token" value="ODI4NTc2NTgwNjk5ODE1OTc3.YGrmEw.LQeXJjsSOl4CgMs00tIPmneJ-3I" />
+    <add key="prefix" value="?" />
     <add key="dataBase" value="2" />
   </appSettings>
 </configuration>
