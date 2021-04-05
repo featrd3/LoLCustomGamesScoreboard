@@ -53,7 +53,7 @@ namespace RitoForCustoms
             return summonerResponse;
         }
 
-        public async static Task<SummonerData> AskMatchByMatchID(string valAPI, string keyAPI, HttpClient httpclient, string matchID)
+        public async static Task<RootMatchByMatchID> AskMatchByMatchID(string valAPI, string keyAPI, HttpClient httpclient, string matchID)
         {
             HttpRequestMessage request = new HttpRequestMessage();
             Uri myUri = new Uri("https://eun1.api.riotgames.com/lol/match/v4/matches/" + matchID, UriKind.Absolute);
@@ -65,11 +65,11 @@ namespace RitoForCustoms
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var summonerResponse = JsonConvert.DeserializeObject<SummonerData>(content);
+            var summonerResponse = JsonConvert.DeserializeObject<RootMatchByMatchID>(content);
             return summonerResponse;
         }
 
-        public async static Task<SummonerData> AskMatchByAccountID(string valAPI, string keyAPI, HttpClient httpclient, string EncryptedSummonerID, string parameters)
+        public async static Task<RootMatchByAccID> AskMatchByAccountID(string valAPI, string keyAPI, HttpClient httpclient, string EncryptedSummonerID, string parameters)
         {
             HttpRequestMessage request = new HttpRequestMessage();
             Uri myUri = new Uri("https://eun1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + EncryptedSummonerID + "?" + parameters, UriKind.Absolute);
@@ -81,7 +81,22 @@ namespace RitoForCustoms
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var summonerResponse = JsonConvert.DeserializeObject<SummonerData>(content);
+            var summonerResponse = JsonConvert.DeserializeObject<RootMatchByAccID>(content);
+            return summonerResponse;
+        }
+        public async static Task<RootMatchByMatchID> AskMatchByTournamentID(string valAPI, string keyAPI, HttpClient httpclient, string tournamentCode ,string matchID)
+        {
+            HttpRequestMessage request = new HttpRequestMessage();
+            Uri myUri = new Uri("https://eun1.api.riotgames.com/lol/match/v4/matches/by-tournament-code/" + tournamentCode +"/"+ matchID, UriKind.Absolute);
+
+            request.RequestUri = myUri;
+            request.Method = HttpMethod.Get;
+            request.Headers.Add(valAPI, keyAPI);
+            HttpResponseMessage response = await httpclient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var summonerResponse = JsonConvert.DeserializeObject<RootMatchByMatchID>(content);
             return summonerResponse;
         }
     }
