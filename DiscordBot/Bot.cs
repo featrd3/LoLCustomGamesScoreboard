@@ -23,7 +23,7 @@ namespace RitoForCustoms.DiscordBot
         public async Task RunAsync()
         {
             var json = string.Empty;
-            using (var fs = File.OpenRead("BotConfigFile.json"))
+            using (var fs = File.OpenRead(@"..\..\..\BotConfigFile.json"))
             using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
             json = await sr.ReadToEndAsync().ConfigureAwait(false);
             var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(json);
