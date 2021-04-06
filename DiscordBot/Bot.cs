@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.IO;
 using Newtonsoft.Json;
 using RitoForCustoms.JSONclasses;
+using RitoForCustoms.BotCommands;
 
 namespace RitoForCustoms.DiscordBot
 {
@@ -43,13 +44,16 @@ namespace RitoForCustoms.DiscordBot
             {
                 StringPrefixes = new string[] { configJson.prefix },
                 EnableDms = true,
-                EnableMentionPrefix = true
+                EnableMentionPrefix = true,
+
+
             };
 
             Commands = Client.UseCommandsNext(commandsConfig);
 
-            await Client.ConnectAsync();
+            Commands.RegisterCommands<PingPong>();
 
+            await Client.ConnectAsync();
             await Task.Delay(-1);
         }
     
