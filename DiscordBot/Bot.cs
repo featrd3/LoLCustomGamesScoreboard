@@ -52,6 +52,7 @@ namespace RitoForCustoms.DiscordBot
             Commands = Client.UseCommandsNext(commandsConfig);
 
             Commands.RegisterCommands<PingPong>();
+            Commands.RegisterCommands<LoLCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
