@@ -1,10 +1,8 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using RitoForCustoms.DataModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RitoForCustoms.BotCommands
@@ -23,8 +21,33 @@ namespace RitoForCustoms.BotCommands
         {
             var gameData = LoLGameData.GameDataFill(msg);
 
-            await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false); 
+            var embed = new DiscordEmbedBuilder
+            {
+                Color = new DiscordColor("#FF0000"),
+                Title = "Vote up if ok, vote down to cancel",
+                Description = "Game summary for mode : " + gameData.Map,
+            };
+            var newLine = true;
+            embed.AddField("--- Victory", "---", false);
+            foreach (var player in gameData.PlayerInfo)
+            {
+                if (player.Victory)
+                    embed.AddField((player.Name), player.Champion, true);
+                else if (newLine) { 
+                    newLine = false; 
+                    embed.AddField("--- Defeat", "---", false);
+                    }
+                if (!player.Victory)
+                {
+                    embed.AddField((player.Name), player.Champion, true);
+                };
+            }
 
+            await ctx.RespondAsync(embed: embed.Build()).ConfigureAwait(false);
         }
+
+        
+        
+        
     }
 }
