@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
+using System.IO;
+using Newtonsoft.Json;
+using RitoForCustoms.JSONclasses.LeagueOfLegends;
 
 namespace RitoForCustoms.RiotAPI
 {
@@ -11,8 +14,14 @@ namespace RitoForCustoms.RiotAPI
         {
             var httpclient = new HttpClient();
 
-            string valAPI = "X-Riot-Token";
-            string keyAPI = "RGAPI-4de6686a-60a6-4101-9d21-bfb67f147902";
+            var tempConfigfromFileStream = string.Empty;
+            using (var fileStream = File.OpenRead(@"..\..\..\BotConfigFile.json"))
+            using (var streamReader = new StreamReader(fileStream, new UTF8Encoding(false)))
+            tempConfigfromFileStream = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+            var configJsonRiotAPI = JsonConvert.DeserializeObject<RiotAPIConfigJSON>(tempConfigfromFileStream);
+
+            string valAPI = configJsonRiotAPI.valAPI;
+            string keyAPI = configJsonRiotAPI.keyAPI;
 
             string summonerName = "FeatRd3";
 
