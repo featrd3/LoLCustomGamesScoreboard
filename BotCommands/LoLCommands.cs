@@ -2,6 +2,7 @@
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
+using RitoForCustoms.BotCommandsSupplement;
 using RitoForCustoms.DataModels;
 using RitoForCustoms.DiscordBot;
 using RitoForCustoms.JSONclasses.LeagueOfLegends;
@@ -26,28 +27,8 @@ namespace RitoForCustoms.BotCommands
         public async Task GetGameDataLoL(CommandContext ctx, string msg)
         {
             var gameData = LoLGameData.GameDataFill(msg);
-            var embed = new DiscordEmbedBuilder
-            {
-                Color = new DiscordColor("#FF0000"),
-                Title = "Vote up if ok, vote down to cancel",
-                Description = "Game summary for mode : " + gameData.Map,
-            };
-            var newLine = true;
-            embed.AddField("--- Victory", "---", false);
-            foreach (var player in gameData.PlayerInfo)
-            {
-                if (player.Victory)
-                    embed.AddField((player.Name), player.Champion, true);
-                else if (newLine)
-                {
-                    newLine = false;
-                    embed.AddField("--- Defeat", "---", false);
-                }
-                if (!player.Victory)
-                {
-                    embed.AddField((player.Name), player.Champion, true);
-                };
-            }
+            var embed = LoLCommandsSupp.LolEmbedBuilder(gameData);
+
             await ctx.RespondAsync(embed: embed.Build()).ConfigureAwait(false);
         }
 
@@ -65,7 +46,7 @@ namespace RitoForCustoms.BotCommands
             var freeRotation = await RitoRequests.AskFreeRotation(valAPI, keyAPI, httpclient);
             var allChampionsList = await RitoRequests.AskAllChampions(httpclient);
             var championRotationNames = ConversionAndExtractionFromRequests.ChampionIDtoName(freeRotation, allChampionsList);
-            var msg = string.Join(" ,", championRotationNames);
+            var msg = string.Join(", ", championRotationNames);
 
             await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
 
