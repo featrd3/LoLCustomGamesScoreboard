@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Newtonsoft.Json;
 using RitoForCustoms.DataModels;
+using RitoForCustoms.DiscordBot;
 using RitoForCustoms.JSONclasses.LeagueOfLegends;
 using System.IO;
 using System.Linq;
@@ -54,26 +55,19 @@ namespace RitoForCustoms.BotCommands
         public async Task GetFreeRotationLoL(CommandContext ctx)
         {
 
-            var tempConfigfromFileStream = string.Empty;
-            using (var fileStream = File.OpenRead(@"..\..\..\BotConfigFile.json"))
-            using (var streamReader = new StreamReader(fileStream, new UTF8Encoding(false)))
-                tempConfigfromFileStream = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+            var tempConfigfromFileStream = await LoadConfig.GetContentOfConfigFile();
             var configJsonRiotAPI = JsonConvert.DeserializeObject<RiotAPIConfigJSON>(tempConfigfromFileStream);
 
             string valAPI = configJsonRiotAPI.valAPI;
             string keyAPI = configJsonRiotAPI.keyAPI;
+
             var httpclient = new HttpClient();
             var freeRotation = await RitoRequests.AskFreeRotation(valAPI, keyAPI, httpclient);
             var allChampionsList = await RitoRequests.AskAllChampions(httpclient);
             var championRotationNames = ConversionAndExtractionFromRequests.ChampionIDtoName(freeRotation, allChampionsList);
-            string msg = "";
+            var msg = string.Join(" ,", championRotationNames);
 
-            foreach(string i in championRotationNames)
-            {
-                msg = msg + i + ", ";
-            }
-
-            await ctx.Channel.SendMessageAsync(msg.Remove(msg.Length - 2, 1)).ConfigureAwait(false);
+            await ctx.Channel.SendMessageAsync(msg).ConfigureAwait(false);
 
         }
     }

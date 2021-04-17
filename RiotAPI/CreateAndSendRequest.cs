@@ -13,7 +13,7 @@ namespace RitoForCustoms.RiotAPI
             HttpRequestMessage request = new HttpRequestMessage();
             request.RequestUri = myUri;
             request.Method = HttpMethod.Get;
-            if (valAPI != null & keyAPI != null)
+            if (valAPI != null && keyAPI != null)
                 request.Headers.Add(valAPI, keyAPI);
             HttpResponseMessage response = await httpclient.SendAsync(request);
             response.EnsureSuccessStatusCode();
