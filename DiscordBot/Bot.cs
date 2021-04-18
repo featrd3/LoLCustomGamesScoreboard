@@ -16,10 +16,8 @@ namespace RitoForCustoms.DiscordBot
 {
     public class Bot
     {
-        
         public DiscordClient Client { get; private set; }
         public CommandsNextExtension Commands { get; private set; }
-
         public async Task RunAsync()
         {
             var json = string.Empty;
@@ -27,7 +25,6 @@ namespace RitoForCustoms.DiscordBot
             using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
             json = await sr.ReadToEndAsync().ConfigureAwait(false);
             var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(json);
-
 
             var config = new DiscordConfiguration()
             {
@@ -45,8 +42,6 @@ namespace RitoForCustoms.DiscordBot
                 StringPrefixes = new string[] { configJson.prefix },
                 EnableDms = true,
                 EnableMentionPrefix = true,
-
-
             };
 
             Commands = Client.UseCommandsNext(commandsConfig);

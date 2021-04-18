@@ -13,7 +13,6 @@ namespace RitoForCustoms
         static public string TimeCustomParameters(int time)
         {
             time = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds - time;
-
             return ("champion&queue&season&endTime&beginTime=" + time.ToString() + "&endIndex&beginIndex");
         }
     }
