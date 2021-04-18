@@ -26,7 +26,7 @@ namespace RitoForCustoms.BotCommands
         [Description("Requires command in format 'Map|Nick=Champion,Nick=Champion|Nick=Champion,Nick=Champion'. First '|' separates name of map from winning team, and second '|' separetes winning team from loosing team.")]
         public async Task GetGameDataLoL(CommandContext ctx, string msg)
         {
-            var gameData = LoLGameData.GameDataFill(msg);
+            var gameData = new LoLGameData.GameData(msg);
             var embed = LoLCommandsSupp.LolEmbedBuilder(gameData);
 
             await ctx.RespondAsync(embed: embed.Build()).ConfigureAwait(false);
