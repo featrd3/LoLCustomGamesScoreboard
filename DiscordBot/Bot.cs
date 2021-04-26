@@ -11,6 +11,9 @@ using System.IO;
 using Newtonsoft.Json;
 using RitoForCustoms.JSONclasses;
 using RitoForCustoms.BotCommands;
+using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Enums;
 
 namespace RitoForCustoms.DiscordBot
 {
@@ -27,15 +30,22 @@ namespace RitoForCustoms.DiscordBot
             var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(json);
 
             var config = new DiscordConfiguration()
-            {
+            { 
                 Token = configJson.token,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 MinimumLogLevel = Microsoft.Extensions.Logging.LogLevel.Debug
-                };
+               
+            };
         
             Client = new DiscordClient(config);
             Client.Ready += OnClientReady;
+
+            Client.UseInteractivity(new InteractivityConfiguration()
+            {
+                PollBehaviour = PollBehaviour.KeepEmojis,
+                Timeout = TimeSpan.FromSeconds(20)
+            });
 
             var commandsConfig = new CommandsNextConfiguration
             {
