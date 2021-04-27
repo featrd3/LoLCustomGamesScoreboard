@@ -23,11 +23,8 @@ namespace RitoForCustoms.DiscordBot
         public CommandsNextExtension Commands { get; private set; }
         public async Task RunAsync()
         {
-            var json = string.Empty;
-            using (var fs = File.OpenRead(@"..\..\..\BotConfigFile.json"))
-            using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
-            json = await sr.ReadToEndAsync().ConfigureAwait(false);
-            var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(json);
+            var tempConfigfromFileStream = await LoadConfig.GetContentOfConfigFile();
+            var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(tempConfigfromFileStream);
 
             var config = new DiscordConfiguration()
             { 
@@ -44,8 +41,8 @@ namespace RitoForCustoms.DiscordBot
             Client.UseInteractivity(new InteractivityConfiguration()
             {
                 PollBehaviour = PollBehaviour.KeepEmojis,
-                Timeout = TimeSpan.FromSeconds(20)
-            });
+                Timeout = TimeSpan.FromSeconds(Convert.ToInt32(configJson.interactivityTimeout))
+            }) ;
 
             var commandsConfig = new CommandsNextConfiguration
             {

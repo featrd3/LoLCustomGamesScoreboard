@@ -11,5 +11,9 @@ namespace RitoForCustoms.JSONclasses
         public string token { get; private set; }
         [JsonProperty("prefix")]
         public string prefix { get; private set; }
+        [JsonProperty("interactivityTimeout")]
+        public string interactivityTimeout { get; private set; }
+        [JsonProperty("pollDuration")]
+        public string pollDuration { get; private set; }
     }
 }

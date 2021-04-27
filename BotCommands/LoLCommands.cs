@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using RitoForCustoms.BotCommandsSupplement;
 using RitoForCustoms.DataModels;
 using RitoForCustoms.DiscordBot;
+using RitoForCustoms.JSONclasses;
 using RitoForCustoms.JSONclasses.LeagueOfLegends;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,9 @@ namespace RitoForCustoms.BotCommands
             var gameData = LoLGameData.GameDataFill(msg);
             var embed = LoLCommandsSupp.LolEmbedBuilder(gameData);
 
-            var duration = TimeSpan.FromSeconds(10);
+            var tempConfigfromFileStream = await LoadConfig.GetContentOfConfigFile();
+            var configJson = JsonConvert.DeserializeObject<BotConfigJSON>(tempConfigfromFileStream);
+            var duration = TimeSpan.FromSeconds(Convert.ToInt32(configJson.pollDuration)); 
 
             var response = await CommonBotCommands.AddAndRespondPoolThumbs(ctx, interactivity, embed, duration);
 

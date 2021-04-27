@@ -33,22 +33,22 @@ namespace RitoForCustoms.BotCommandsSupplement
                 var creatorGaveThumbsDown = thumbsDownReaction.Users.Where(x => x.Username.Equals(ctx.User.Username)).FirstOrDefault();
                 if (creatorGaveThumbsDown != null)
                 {
-                    return (false);
+                    return false;
                 }
             }
             var thumbsUpReaction = result.Where(x => x.Emoji.Name.Equals("👍")).FirstOrDefault();
             if (thumbsUpReaction == null)
             {
-                return (false);
+                return false;
             } else
             {
                 var creatorGaveThumbsUp = thumbsUpReaction.Users.Where(x => x.Username.Equals(ctx.User.Username)).FirstOrDefault();
                 if (creatorGaveThumbsUp != null)
                 {
-                    return (true);
+                    return true;
                 }
             }
-            return (false);
+            return false;
         }
     }
 }
