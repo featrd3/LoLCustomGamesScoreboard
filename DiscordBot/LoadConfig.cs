@@ -15,7 +15,6 @@ namespace RitoForCustoms.DiscordBot
             using (var streamReader = new StreamReader(fileStream, new UTF8Encoding(false)))
                 tempConfigfromFileStream = await streamReader.ReadToEndAsync().ConfigureAwait(false);
             return tempConfigfromFileStream;
-
         }
     }
 }
